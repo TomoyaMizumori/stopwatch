@@ -1,6 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Timer: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!location.state) {
+      alert('初めにログインをしてください！');
+      navigate("/")
+    }
+  })
+
+
   const [time, setTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [lapList, setLapList] = useState<number[]>([]);

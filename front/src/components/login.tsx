@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>("");
 
     const navigate = useNavigate();
   
@@ -20,7 +20,7 @@ export const Login: React.FC = () => {
   
         alert("ログインに成功しました！");
   
-        navigate("/timer");
+        navigate("/timer", {state:{isLogin: true}});
       } catch(error) {
         setError("ログインに失敗しました");
       }

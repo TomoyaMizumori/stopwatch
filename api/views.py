@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics, status, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -20,8 +21,7 @@ class UserCreateAPIViewSet(generics.CreateAPIView):
         user.set_password(user.password)
         user.save()
 
-
-class LoginUserViewSet(generics.CreateAPIView):
+class LoginUserViewSet(generics.CreateAPIView, LoginRequiredMixin):
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
