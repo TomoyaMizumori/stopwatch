@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics, status, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -7,7 +8,7 @@ from .models import CustomUser
 from .serializer import LoginSerializer, UserSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
