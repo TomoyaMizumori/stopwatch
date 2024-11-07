@@ -35,9 +35,10 @@ class LoginUserViewSet(generics.CreateAPIView):
 
             if user.check_password(password):
                 login(request, user)
-                return Response({'user': UserSerializer(user, context=self.get_serializer).data})
+                return Response({'user': UserSerializer(user, context=self.get_serializer_context()).data})
             else:
                 print("パスワードが違う！！")
+                return Response({'error': 'incorrect password'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
         except CustomUser.DoesNotExist:
